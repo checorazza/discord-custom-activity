@@ -32,12 +32,12 @@ async function setActivity() {
   if (!rpc) return;
 
   rpc.setActivity({
-    details: "Programando con mi lindo novio",
+    details: "Amo a mi lindo novio",
     state: "Alejense putas",
 
     buttons: [
       {
-        label: "hola chango",
+        label: "Proyecto",
         url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       },
     ],
@@ -59,4 +59,4 @@ rpc.on("ready", () => {
 
 rpc.login({ clientId: applicationId }).catch(console.error);
 
-client.login(process.env.TOKEN);
+client.login(process.env.APPLICATION_TOKEN);
