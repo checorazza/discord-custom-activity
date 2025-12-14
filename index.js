@@ -6,6 +6,28 @@ const rpc = new RPC.Client({ transport: "ipc" });
 const applicationId = process.env.APPLICATION_ID;
 RPC.register(applicationId);
 
+const { Client, GatewayIntentBits } = require("discord.js");
+const {
+  joinVoiceChannel,
+  createAudioPlayer,
+  createAudioResource,
+  StreamType,
+} = require("@discordjs/voice");
+const { spawn } = require("child_process");
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
+});
+
+client.once("clientReady", () => {
+  console.log(`Logged in as ${client.user.tag}`);
+});
+
 async function setActivity() {
   if (!rpc) return;
 
@@ -36,3 +58,5 @@ rpc.on("ready", () => {
 });
 
 rpc.login({ clientId: applicationId }).catch(console.error);
+
+client.login(process.env.TOKEN);
